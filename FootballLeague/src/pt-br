@@ -1,0 +1,108 @@
+import javax.swing.*;
+
+/**
+ * Um programa simples para simular e exibir a classificação de uma liga esportiva.
+ */
+public class Principal {
+
+    /**
+     * Método principal para executar o programa.
+     *
+     * @param args Argumentos da linha de comando (não utilizados)
+     */
+    public static void main(String[] args) {
+        // Inicializa as variáveis para armazenar informações das equipes
+        int escolha; // Escolha feita pelo usuário
+        String[] equipes = new String[10]; // Array para armazenar os nomes das equipes
+        int[] pontos = new int[10]; // Array para armazenar os pontos das equipes
+        int[][] resultados = new int[10][4]; // Array para armazenar os resultados dos jogos de cada equipe: [vitórias, empates, derrotas, gols marcados]
+        boolean[][] jaJogou = new boolean[10][10]; // Matriz para registrar os jogos já realizados
+
+        // Loop principal do programa
+        while (true) {
+            // Exibe o menu de opções e obtém a entrada do usuário
+            String entrada = JOptionPane.showInputDialog(null,
+                    "[ESCOLHA UMA OPÇÃO]\n1. Registrar equipes\n2. Simular um jogo\n3. Ver Classificação\n4. SAIR\nOpção:");
+            escolha = Integer.parseInt(entrada);
+
+            // Switch baseado na escolha do usuário
+            switch (escolha) {
+                case 1: // Registrar equipes
+                    JOptionPane.showMessageDialog(null, "[REGISTRAR EQUIPES]");
+                    for (int i = 0; i < 10; i++) {
+                        equipes[i] = JOptionPane.showInputDialog("Equipe " + (i + 1) + ":");
+                        pontos[i] = 0; // Inicializa os pontos de cada equipe como 0
+                    }
+                    JOptionPane.showMessageDialog(null, "[EQUIPES REGISTRADAS]");
+                    break;
+                case 2: // Simular um jogo
+                    JOptionPane.showMessageDialog(null, "[SIMULAR UM JOGO]");
+                    JOptionPane.showMessageDialog(null, "[ESCOLHA DUAS EQUIPES PARA O JOGO]: ");
+                    StringBuilder equipesEscolhidas = new StringBuilder();
+                    for (int i = 0; i < 10; i++) {
+                        equipesEscolhidas.append((i + 1)).append(". ").append(equipes[i]).append("\n");
+                    }
+                    JOptionPane.showMessageDialog(null, equipesEscolhidas.toString());
+                    int indicePrimeiraEquipe = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da primeira equipe:")) - 1;
+                    int indiceSegundaEquipe = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da segunda equipe:")) - 1;
+
+                    // Verifica se as equipes já jogaram antes
+                    if (jaJogou[indicePrimeiraEquipe][indiceSegundaEquipe] || jaJogou[indiceSegundaEquipe][indicePrimeiraEquipe]) {
+                        JOptionPane.showMessageDialog(null, "Este jogo já foi realizado! Escolha outro par de equipes.");
+                        break;
+                    }
+
+                    jaJogou[indicePrimeiraEquipe][indiceSegundaEquipe] = true;
+                    jaJogou[indiceSegundaEquipe][indicePrimeiraEquipe] = true;
+
+                    if (indicePrimeiraEquipe < 0 || indicePrimeiraEquipe >= 10 || indiceSegundaEquipe < 0 || indiceSegundaEquipe >= 10) {
+                        JOptionPane.showMessageDialog(null, "Índice de equipe inválido.");
+                        break;
+                    }
+                    String primeiraEquipe = equipes[indicePrimeiraEquipe];
+                    String segundaEquipe = equipes[indiceSegundaEquipe];
+                    JOptionPane.showMessageDialog(null, "[SIMULANDO O JOGO]\nSimulando o jogo entre " + primeiraEquipe + " e " + segundaEquipe + "...");
+                    double numeroAleatorio = Math.random();
+                    if (numeroAleatorio < 0.5) {
+                        pontos[indicePrimeiraEquipe] += 3; // Adiciona 3 pontos à equipe vencedora
+                        resultados[indicePrimeiraEquipe][0]++; // Incrementa o número de vitórias da equipe
+                        resultados[indiceSegundaEquipe][2]++; // Incrementa o número de derrotas da outra equipe
+                        JOptionPane.showMessageDialog(null, "O vencedor do jogo é: " + primeiraEquipe);
+                    } else {
+                        pontos[indiceSegundaEquipe] += 3; // Adiciona 3 pontos à equipe vencedora
+                        resultados[indiceSegundaEquipe][0]++; // Incrementa o número de vitórias da equipe
+                        resultados[indicePrimeiraEquipe][2]++; // Incrementa o número de derrotas da outra equipe
+                        JOptionPane.showMessageDialog(null, "O vencedor do jogo é: " + segundaEquipe);
+                    }
+                    resultados[indicePrimeiraEquipe][3] += 1; // Adiciona 1 ao total de gols marcados pela equipe
+                    resultados[indiceSegundaEquipe][3] += 1; // Adiciona 1 ao total de gols marcados pela outra equipe
+                    break;
+                case 3: // Ver classificação
+                    JOptionPane.showMessageDialog(null, "[CLASSIFICAÇÃO]");
+                    String[] nomesColunas = {"Nome da Equipe", "Total de Jogos", "Vitórias", "Empates", "Derrotas", "Total de Pontos", "Gols Marcados", "Gols Sofridos", "Saldo de Gols"};
+                    Object[][] dados = new Object[10][9];
+                    for (int i = 0; i < 10; i++) {
+                        int totalJogos = resultados[i][0] + resultados[i][1] + resultados[i][2];
+                        int empates = totalJogos - resultados[i][0] - resultados[i][2];
+                        int totalPontos = (resultados[i][0] * 3) + (empates * 1);
+                        int golsMarcados = resultados[i][3];
+                        int golsSofridos = 0;
+                        for (int j = 0; j < 10; j++) {
+                            golsSofridos += resultados[j][3];
+                        }
+                        int saldoGols = golsMarcados - golsSofridos;
+                        dados[i] = new Object[]{equipes[i], totalJogos, resultados[i][0], empates, resultados[i][2], totalPontos, golsMarcados, golsSofridos, saldoGols};
+                    }
+                    JTable tabela = new JTable(dados, nomesColunas);
+                    tabela.setEnabled(false);
+                    JOptionPane.showMessageDialog(null, new JScrollPane(tabela));
+                    break;
+                case 4: // Sair do programa
+                    JOptionPane.showMessageDialog(null, "[ENCERRANDO O PROGRAMA...]");
+                    System.exit(0);
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção inválida. Por favor, escolha uma opção válida.");
+            }
+        }
+    }
+}
