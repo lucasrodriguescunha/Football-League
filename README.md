@@ -43,9 +43,7 @@ a. Se o usuário repetir a dupla de times para um novo jogo o programa deve reto
 
 1. Antes de iniciar a codificação do projeto a criação o diagrama de classe do projeto, mostrando o relacionamento (associações) entre as classes do projeto
 
-2. O projeto deve ter no mínimo 3 classes, desconsiderando a classe principal;a. As classes, atributos e métodos devem ser definidos por você usando sua capacidade de
-
-abstração;
+2. O projeto deve ter no mínimo 3 classes, desconsiderando a classe principal;a. As classes, atributos e métodos devem ser definidos por você usando sua capacidade de abstração;
 
 3. Os dados do projeto devem ser armazenados na memória RAM em uma estrutura de array.
 
