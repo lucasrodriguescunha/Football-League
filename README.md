@@ -54,3 +54,5 @@ Assim é obrigatório o uso da classe ArrayList;
 4. Para fazer a entrada de dados com o usuário e troca de mensagens deve ser usada a classe JOptionPane, porém a saída da tabela do campeonato poderá ser impressa no console.
 
 5. Você deve criar uma classe estática (somente com métodos estáticos, pesquise sobre o assunto) para encapsular os métodos de leitura/escrita de dados com o usuário. Nesta classe, deve ser feita as conversões de dados necessárias e tratamentos de erros (de conversão de tipos e outros). Métodos sugeridos para tal classe:
+
+![UML](https://github.com/lucasrodriguescunha/Football-League/blob/main/image-c784efeb-b95c-4dc1-a124-976326140f27.png?raw=true)
