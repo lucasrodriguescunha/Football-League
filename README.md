@@ -55,4 +55,4 @@ Assim é obrigatório o uso da classe ArrayList;
 
 5. Você deve criar uma classe estática (somente com métodos estáticos, pesquise sobre o assunto) para encapsular os métodos de leitura/escrita de dados com o usuário. Nesta classe, deve ser feita as conversões de dados necessárias e tratamentos de erros (de conversão de tipos e outros). Métodos sugeridos para tal classe:
 
-![UML](https://github.com/lucasrodriguescunha/Football-League/blob/main/image-c784efeb-b95c-4dc1-a124-976326140f27.png?raw=true)
+![UML](https://github.com/lucasrodriguescunha/Football-League/blob/main/image-fb90cad3-f286-45ea-be63-f9f276bf79bd.png?raw=true)
