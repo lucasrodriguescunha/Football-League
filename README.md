@@ -35,7 +35,7 @@ Na opção 2 (Simular Jogos) o programa deve:
 a. Se o usuário repetir a dupla de times para um novo jogo o programa deve retornar a seguinte mensagem “Este jogo já foi realizado! Escolha outra dupla de times.”;
 5. A tabela de pontuação do campeonato deve ser semelhante a tabela abaixo:
 
-![Tabela](URL_da_Imagem)
+![Tabela](https://github.com/lucasrodriguescunha/Football-League/blob/main/image-c784efeb-b95c-4dc1-a124-976326140f27.png?raw=true)
 
 6. Quando todos os times já tiverem se enfrentado e não houver mais a possibilidade de escolher um jogo, o programa deve apresentar o nome do(s) time(s) campeão(ões);
 
